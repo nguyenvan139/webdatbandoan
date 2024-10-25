@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title th:text="${title} ?: 'Your Cart'">Your Cart</title>
+    <link rel="shortcut icon" href="https://tastykitchen.vn/images/mobile/logo-mobile.svg" type="image/x-icon"/>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<section layout:fragment="content" class="container mt-3">
+    <h1>Your Cart</h1>
+
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <p th:text="${error}"></p>
+    </div>
+
+    <div th:if="${#lists.isEmpty(cartItems)}" class="alert alert-info">Your cart is empty.</div>
+
+    <table class="table" th:unless="${#lists.isEmpty(cartItems)}">
+        <thead class="table-light">
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Action</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${cartItems}">
+            <td th:text="${item.product.name}"></td>
+            <td>
+                <form th:action="@{/cart/decrease/{productId}(productId=${item.product.id})}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-sm btn-secondary">-</button>
+                </form>
+                <span th:text="${item.quantity}"></span>
+                <form th:action="@{/cart/increase/{productId}(productId=${item.product.id})}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-sm btn-secondary">+</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/cart/remove/{productId}(productId=${item.product.id})}" class="btn btn-danger btn-sm">Remove</a>
+            </td>
+            <td th:text="${item.product.price * item.quantity}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="mt-9">
+        <h5><strong>Total: ₫<span th:text="${totalPrice}"></span></strong></h5>
+
+        <div th:if="${#lists.isEmpty(cartItems)}">
+            <a th:href="@{/cart/clear}" class="btn btn-secondary">Clear Cart</a>
+        </div>
+        <div th:if="!${#lists.isEmpty(cartItems)}">
+            <a th:href="@{/cart/clear}" class="btn btn-secondary">Clear Cart</a>
+            |
+            <a th:href="@{/order/checkout}" class="btn btn-primary">Check Out</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>

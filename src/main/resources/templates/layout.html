@@ -1,0 +1,142 @@
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta charset="UTF-8">
+        <title>Layout</title>
+        <link rel="shortcut icon" href="https://tastykitchen.vn/images/mobile/logo-mobile.svg" type="image/x-icon"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/gh/eliyantosarage/font-awesome-pro@main/fontawesome-pro-6.5.1-web/css/all.min.css" rel="stylesheet">
+        <link
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+                rel="stylesheet"
+        />
+    </head>
+    <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light flex items-center justify-between p-1 bg-white dark:bg-zinc-800 shadow-md mb-2">
+
+        <div class="container-fluid">
+            <img src="data:image/png;base64,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" alt="Logo" class="rounded-full" width="50" height="50" />
+            <a class="navbar-brand text-black" href="/products">TASTY</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-black active" aria-current="page"
+                           href="/products">Thực đơn</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('user')">
+                        <a th:href="@{/reservations/add}" class="nav-link text-black">Đặt bàn</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('admin')">
+                        <a th:href="@{/products/add}" class="nav-link text-black">Thêm món</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('admin')">
+                        <a th:href="@{/categories}" class="nav-link text-black">
+                             Loại món</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('admin')">
+                        <a th:href="@{/users}" class="nav-link text-black">Danh sách người dùng</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('admin')">
+                        <a th:href="@{order}" class="nav-link text-black">Danh sách đặt món</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('admin')">
+                        <a th:href="@{/reservations}" class="nav-link text-black">Danh sách đặt bàn</a>
+                    </li>
+
+
+                </ul>
+                <form th:action="@{/products/search}" method="get" class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()">
+                    <a><i class="fas fa-search"></i></a>
+                    <input type="text" name="query" placeholder="Search Product" class="ml-2 bg-transparent focus:outline-none" />
+                </form>
+
+
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+
+                    <li class="nav-item d-flex align-items-center" sec:authorize="hasAnyAuthority('user')">
+                        <div class="flex items-center space-x-4">
+                            <button class="bg-zinc-100 dark:bg-zinc-700 p-2 rounded-full">
+                                <a data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-body m-1" th:href="@{cart}">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </a>
+                            </button>
+                        </div>
+                    </li>
+
+                    <li class="nav-item d-flex align-items-center"
+                        sec:authorize="isAuthenticated()">
+                        <div class="flex items-center space-x-4">
+                            <button class= "bg-zinc-100 dark:bg-zinc-700 p-2 rounded-full">
+                                <a
+                                        data-mdb-ripple-init
+                                        class="btn btn-link btn-floating btn-lg text-body m-1"
+                                        th:href="@{users/profile}">
+                                    <i class="fas fa-user"></i>
+                                </a>
+                            </button>
+                        </div>
+                    </li>
+
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" method="post">
+                            <button class="btn btn-outline-primary"
+                                    type="submit">Đăng xuất</button>
+                        </form>
+                    </li>
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
+                        <a class="btn btn-outline-primary" href="/login">Đăng nhập</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <section layout:fragment="content">
+            <!-- Nội dung cụ thể của từng trang sẽ được đặt tại đây -->
+        </section>
+    </div>
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-body-tertiary text-muted">
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid column -->
+                <div class="col-md-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                    <p><i class="fas fa-home me-3"></i> Phường Hiệp Phú, TP.Thủ Đức, Việt Nam</p>
+                    <p>
+                        <i class="fas fa-envelope me-3"></i>
+                        tastykitchen@gmail.com
+                    </p>
+                    <p><i class="fas fa-phone me-3"></i> + 03 62 572 88</p>
+                    <p><i class="fas fa-print me-3"></i> + 03 48 659 89</p>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2024
+            <a class="text-reset fw-bold" href="https://mdbootstrap.com/">tastykitchen.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+    </script>
+    </body>
+    </html>

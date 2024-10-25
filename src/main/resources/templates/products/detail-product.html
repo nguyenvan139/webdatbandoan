@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+<head>
+    <title th:text="${title} ?: 'Product Detail'">Product Detail</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .card {
+            border: none; /* Remove default card border */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+        }
+        .card-title {
+            color: #007bff; /* Blue title color */
+            font-size: 2rem; /* Larger title font size */
+            margin-bottom: 1.5rem; /* Space below title */
+        }
+        .card-text {
+            font-size: 1.2rem;
+        }
+        .form-control {
+            width: 80px; /* Adjust width of quantity input */
+        }
+        .btn-custom {
+            background-color: #ffc107; /* Yellow add-to-cart button */
+            border-color: #ffc107; /* Matching border color */
+        }
+        .btn-custom:hover {
+            background-color: #e0a800; /* Darker yellow on hover */
+            border-color: #e0a800; /* Matching border color */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Blue back-to-products button */
+            border-color: #007bff; /* Matching border color */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            border-color: #0056b3; /* Matching border color */
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <img th:src="@{${product.thumnail}}" class="card-img-top" alt="Product Image" style="width: 650px; height:400px ">
+            <h5 class="card-title" th:text="${product.name}"></h5>
+            <p class="card-text">
+                <strong>Price: $</strong><span th:text="${product.price}"></span><br>
+                <strong>Description:</strong> <span th:text="${product.description}"></span><br>
+                <strong>Category:</strong> <span th:text="${product.category.name}"></span><br>
+                <strong>Quantity:</strong> <span th:text="${product.quantity}"></span>
+            </p>
+            <form th:action="@{/cart/add}" method="post" sec:authorize="isAuthenticated()">
+                <input type="hidden" th:value="${product.id}" name="productId"/>
+                <div th:if="${product.quantity > 0}" class="d-inline-flex align-items-center">
+                    <input type="number" name="quantity" min="1" th:attr="max=${product.quantity}" value="1" class="form-control d-inline-block mx-1 input-custom">
+                    <button type="submit" class="btn btn-warning mx-1 btn-custom">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <a th:href="@{/products}" class="btn btn-primary">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </a>
+            </form>
+
+
+
+
+        </div>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
